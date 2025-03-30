@@ -1,8 +1,5 @@
 package com.example.backend_bd;
 
-import com.example.backend_bd.User;
-import com.example.backend_bd.JWTAuthtenticationConfig;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;

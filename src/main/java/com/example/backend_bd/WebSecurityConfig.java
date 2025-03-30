@@ -9,10 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
-@EnableWebSecurity()
+@EnableWebSecurity
 @Configuration
-class WebSecurityConfig{
+class WebSecurityConfig {
 
     @Autowired
     JWTAuthorizationFilter jwtAuthorizationFilter;
@@ -21,12 +20,13 @@ class WebSecurityConfig{
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
         http
-                .csrf((csrf) -> csrf
-                        .disable())
-                .authorizeHttpRequests( authz -> authz
-                        .requestMatchers(HttpMethod.POST,Constants.LOGIN_URL).permitAll()
-                        .anyRequest().authenticated())
-                .addFilterAfter(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(authz -> authz
+                .requestMatchers(HttpMethod.POST, Constants.LOGIN_URL).permitAll()
+                .requestMatchers(HttpMethod.GET, "/eventos", "/eventos/buscar").permitAll() // ← nuevas rutas públicas
+                .anyRequest().authenticated()
+            )
+            .addFilterAfter(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
