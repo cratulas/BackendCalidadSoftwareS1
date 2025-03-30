@@ -21,6 +21,14 @@ public class User implements UserDetails {
     private String email;
     private String password;
 
+    public User() {}
+
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -57,7 +65,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(); // Puedes retornar una lista vacía o agregar roles en el futuro
+        return List.of(); // 
     }
 
     @Override
